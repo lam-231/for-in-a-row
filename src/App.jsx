@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './App.css';
 import StartPage from './pages/StartPage';
 import GamePage from './pages/GamePage';
-import ResultsPage from './pages/ResultPage';
 
 function App() {
     const [currentView, setCurrentView] = useState('start');
@@ -12,12 +11,9 @@ function App() {
     };
 
     const handleEndGame = () => {
-        setCurrentView('results');
+        setCurrentView('start');
     };
 
-    const handleRestart = () => {
-        setCurrentView('game');
-    };
 
     return (
         <div className="App">
@@ -31,9 +27,6 @@ function App() {
                 <GamePage onEndGame={handleEndGame} />
             )}
 
-            {currentView === 'results' && (
-                <ResultsPage onRestart={handleRestart} />
-            )}
         </div>
     );
 }

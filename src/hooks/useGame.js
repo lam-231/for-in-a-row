@@ -1,11 +1,18 @@
-import { useState } from 'react';
-import { ROWS, COLS, createEmptyBoard, PLAYER_1, PLAYER_2 } from '../constants';
+import { useState, useEffect } from 'react';
+import { PLAYER_1, PLAYER_2 } from '../constants';
 
-export const useGame = () => {
-    const [board, setBoard] = useState(createEmptyBoard());
+const createBoard = (rows, cols) =>
+    Array(rows).fill(null).map(() => Array(cols).fill(null));
+
+export const useGame = (rows, cols) => {
+    const [board, setBoard] = useState(() => createBoard(rows, cols));
     const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
     const [winner, setWinner] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
+
+    useEffect(() => {
+        resetGame();
+    }, [rows, cols]);
 
     const checkWinner = (boardState, player) => {
         const directions = [
@@ -15,8 +22,11 @@ export const useGame = () => {
             [1, -1]
         ];
 
-        for (let r = 0; r < ROWS; r++) {
-            for (let c = 0; c < COLS; c++) {
+        const currentRows = boardState.length;
+        const currentCols = boardState[0].length;
+
+        for (let r = 0; r < currentRows; r++) {
+            for (let c = 0; c < currentCols; c++) {
                 if (boardState[r][c] !== player) continue;
 
                 for (let [dr, dc] of directions) {
@@ -26,8 +36,8 @@ export const useGame = () => {
                         const nc = c + dc * i;
 
                         if (
-                            nr >= 0 && nr < ROWS &&
-                            nc >= 0 && nc < COLS &&
+                            nr >= 0 && nr < currentRows &&
+                            nc >= 0 && nc < currentCols &&
                             boardState[nr][nc] === player
                         ) {
                             count++;
@@ -52,7 +62,7 @@ export const useGame = () => {
         const newBoard = board.map(row => [...row]);
 
         let rowIndex = -1;
-        for (let r = ROWS - 1; r >= 0; r--) {
+        for (let r = board.length - 1; r >= 0; r--) {
             if (newBoard[r][colIndex] === null) {
                 rowIndex = r;
                 break;
@@ -76,7 +86,7 @@ export const useGame = () => {
     };
 
     const resetGame = () => {
-        setBoard(createEmptyBoard());
+        setBoard(createBoard(rows, cols));
         setCurrentPlayer(PLAYER_1);
         setWinner(null);
         setIsGameOver(false);
