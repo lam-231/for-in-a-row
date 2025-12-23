@@ -1,4 +1,4 @@
-const ResultsPage = ({ onRestart }) => {
+/* const ResultsPage = ({ onRestart }) => {
     return (
         <div className="page">
             <h2>Гра завершена!</h2>
@@ -8,4 +8,4 @@ const ResultsPage = ({ onRestart }) => {
     );
 };
 
-export default ResultsPage;
+export default ResultsPage; */

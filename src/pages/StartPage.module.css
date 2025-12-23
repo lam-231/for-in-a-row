@@ -1,0 +1,30 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 20px;
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.playBtn {
+    background-color: #646cff;
+    font-size: 1.2em;
+    padding: 0.6em 1.2em;
+}
+
+.playBtn:hover {
+    background-color: #535bf2;
+}
+
+.players {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}

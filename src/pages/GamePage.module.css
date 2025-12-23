@@ -1,0 +1,26 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.gameInfo {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.sessionId {
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+}

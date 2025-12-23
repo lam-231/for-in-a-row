@@ -2,24 +2,32 @@ import { useState } from 'react';
 import Modal from '../components/Modal';
 import SettingsForm from '../components/SettingsForm';
 import { useSettings } from '../context/SettingsContext';
+import { useNavigate } from 'react-router-dom';
+import styles from './StartPage.module.css';
 
-const StartPage = ({ onStart }) => {
+const StartPage = () => {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     const { settings } = useSettings();
+    const navigate = useNavigate();
+
+    const handleStartGame = () => {
+        const userId = `user-${Date.now()}`;
+        navigate(`/game/${userId}`);
+    };
 
     return (
-        <div className="page">
+        <div className={styles.page}>
             <h2>Вітаємо у грі "4 в ряд"!</h2>
 
-            <p>
+            <p className={styles.players}>
                 Гравці: <strong>{settings.player1Name}</strong> vs <strong>{settings.player2Name}</strong>
             </p>
 
             <p>Розмір поля: {settings.rows}x{settings.cols}</p>
 
-            <div className="controls">
-                <button onClick={onStart} className="play-btn">Почати гру</button>
+            <div className={styles.controls}>
+                <button onClick={handleStartGame} className={styles.playBtn}>Почати гру</button>
 
                 <button
                     onClick={() => setIsSettingsOpen(true)}
