@@ -4,13 +4,17 @@ import './index.css'
 import App from './App.jsx'
 import { SettingsProvider } from './context/SettingsContext';
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <BrowserRouter>
-          <SettingsProvider>
-            <App />
-          </SettingsProvider>
-      </BrowserRouter>
+      <Provider store={store}>
+          <BrowserRouter>
+              {/*<SettingsProvider>*/}
+                <App />
+              {/*</SettingsProvider>*/}
+          </BrowserRouter>
+      </Provider>
   </StrictMode>,
 )

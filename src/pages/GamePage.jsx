@@ -1,13 +1,17 @@
-import { useSettings } from '../context/SettingsContext';
+//import { useSettings } from '../context/SettingsContext';
 import { useGame } from "../hooks/useGame.js";
 import GameBoard from '../components/GameBoard';
 import Modal from '../components/Modal';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './GamePage.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { addResult } from '../store/resultsSlice';
 
 const GamePage = () => {
-    const { settings } = useSettings();
+    //const { settings } = useSettings();
 
+    const settings = useSelector((state) => state.settings);
     const { board, currentPlayer, winner, isGameOver, makeMove, resetGame } = useGame(settings.rows, settings.cols);
 
     const currentPlayerName = currentPlayer === 'red' ? settings.player1Name : settings.player2Name;
@@ -18,6 +22,22 @@ const GamePage = () => {
     const handleExit = () => {
         navigate('/');
     };
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (isGameOver) {
+            const resultData = {
+                id: Date.now(),
+                date: new Date().toLocaleString(),
+                winner: winner === 'draw' ? 'Нічия' : (winner === 'red' ? settings.player1Name : settings.player2Name),
+                player1: settings.player1Name,
+                player2: settings.player2Name,
+            };
+
+            dispatch(addResult(resultData));
+        }
+    }, [isGameOver]);
+
 
     return (
         <div className={styles.page}>

@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useSettings } from '../context/SettingsContext';
+//import { useSettings } from '../context/SettingsContext';
 import styles from './SettingsForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSettings } from '../store/settingsSlice';
 
 const schema = yup.object().shape({
     player1Name: yup.string()
@@ -22,7 +24,9 @@ const schema = yup.object().shape({
 });
 
 const SettingsForm = ({ onClose }) => {
-    const { settings, updateSettings } = useSettings();
+    //const { settings, updateSettings } = useSettings();
+    const settings = useSelector((state) => state.settings);
+    const dispatch = useDispatch();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -30,7 +34,8 @@ const SettingsForm = ({ onClose }) => {
     });
 
     const onSubmit = (data) => {
-        updateSettings(data);
+        //updateSettings(data);
+        dispatch(updateSettings(data));
         onClose();
     };
 

@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import Modal from '../components/Modal';
 import SettingsForm from '../components/SettingsForm';
-import { useSettings } from '../context/SettingsContext';
+//import { useSettings } from '../context/SettingsContext';
 import { useNavigate } from 'react-router-dom';
 import styles from './StartPage.module.css';
+import { useSelector } from 'react-redux';
 
 const StartPage = () => {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-    const { settings } = useSettings();
+    //const { settings } = useSettings();
+    const settings = useSelector((state) => state.settings);
     const navigate = useNavigate();
 
     const handleStartGame = () => {
@@ -28,6 +30,10 @@ const StartPage = () => {
 
             <div className={styles.controls}>
                 <button onClick={handleStartGame} className={styles.playBtn}>Почати гру</button>
+
+                <button onClick={() => navigate('/scoreboard')} style={{ backgroundColor: '#2c3e50' }}>
+                    Таблиця лідерів
+                </button>
 
                 <button
                     onClick={() => setIsSettingsOpen(true)}

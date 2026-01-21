@@ -10,8 +10,8 @@ export const SettingsProvider = ({ children }) => {
         const savedSettings = localStorage.getItem('gameSettings');
 
         const defaultSettings = {
-            rows: ROWS, // 6
-            cols: COLS, // 7
+            rows: ROWS,
+            cols: COLS,
             player1Name: 'Червоний',
             player2Name: 'Жовтий'
         };
@@ -19,7 +19,7 @@ export const SettingsProvider = ({ children }) => {
         if (savedSettings) {
             try {
                 const parsed = JSON.parse(savedSettings);
-                return { ...defaultSettings, ...parsed };
+                   return { ...defaultSettings, ...parsed };
             } catch (e) {
                 console.error("Помилка читання налаштувань", e);
                 return defaultSettings;
