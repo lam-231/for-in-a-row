@@ -1,9 +1,28 @@
 import { useState, useEffect } from 'react';
 import { PLAYER_1, PLAYER_2 } from '../constants';
 
+/**
+ * Створює пусте ігрове поле заданого розміру.
+ * @param {number} rows - Кількість рядків.
+ * @param {number} cols - Кількість колонок.
+ * @returns {Array<Array<string|null>>} Двовимірний масив, що представляє ігрове поле.
+ */
 const createBoard = (rows, cols) =>
     Array(rows).fill(null).map(() => Array(cols).fill(null));
 
+
+/**
+ * Кастомний хук для управління логікою гри "Чотири в ряд".
+ * @param {number} rows - Кількість рядків на ігровому полі.
+ * @param {number} cols - Кількість колонок на ігровому полі.
+ * @returns {Object} Об'єкт зі станом гри та функціями для управління нею.
+ * @property {Array<Array<string|null>>} board - Поточний стан ігрового поля.
+ * @property {string} currentPlayer - Поточний гравець (PLAYER_1 або PLAYER_2).
+ * @property {string|null} winner - Переможець ('red', 'yellow', 'draw' або null).
+ * @property {boolean} isGameOver - Прапорець, що вказує на завершення гри.
+ * @property {Function} makeMove - Функція для здійснення ходу в задану колонку.
+ * @property {Function} resetGame - Функція для скидання стану гри.
+ */
 export const useGame = (rows, cols) => {
     const [board, setBoard] = useState(() => createBoard(rows, cols));
     const [currentPlayer, setCurrentPlayer] = useState(PLAYER_1);
@@ -14,6 +33,14 @@ export const useGame = (rows, cols) => {
         resetGame();
     }, [rows, cols]);
 
+
+
+    /**
+     * Перевіряє наявність переможця на полі.
+     * @param {Array<Array<string|null>>} boardState - Поточний стан поля.
+     * @param {string} player - Гравець для перевірки.
+     * @returns {boolean} Повертає true, якщо гравець зібрав 4 фішки в ряд.
+     */
     const checkWinner = (boardState, player) => {
         const directions = [
             [0, 1],
@@ -52,10 +79,19 @@ export const useGame = (rows, cols) => {
         return false;
     };
 
+    /**
+     * Перевіряє, чи закінчилась гра внічию (немає вільних клітинок).
+     * @param {Array<Array<string|null>>} boardState - Поточний стан поля.
+     * @returns {boolean} Повертає true, якщо нічия.
+     */
     const checkDraw = (boardState) => {
         return boardState.every(row => row.every(cell => cell !== null));
     };
 
+    /**
+     * Здійснює хід поточного гравця у вибрану колонку.
+     * @param {number} colIndex - Індекс колонки для ходу.
+     */
     const makeMove = (colIndex) => {
         if (isGameOver) return;
 
@@ -85,6 +121,9 @@ export const useGame = (rows, cols) => {
         }
     };
 
+    /**
+     * Скидає гру до початкового стану.
+     */
     const resetGame = () => {
         setBoard(createBoard(rows, cols));
         setCurrentPlayer(PLAYER_1);

@@ -1,16 +1,30 @@
-# React + Vite
+# Four in a Row 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Класична гра "Чотири в ряд", розроблена з використанням сучасного стека веб-технологій. Проєкт підтримує кастомізацію правил гри, збереження статистики та налаштувань гравців.
 
-Currently, two official plugins are available:
+## Основний функціонал
+- **Гнучкі налаштування:** зміна розміру ігрового поля, від 6x7 до 12x12.
+- **Кастомізація гравців:** можливість задавати власні імена для гравці.
+- **Таблиця лідерів:** збереження історії матчів та переможців між сесіями (завдяки Redux та `localStorage`).
+- **Валідація:** перевірка введених даних у налаштуваннях за допомогою React Hook Form та Yup.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Технології та конфігурація
+Проєкт ініціалізовано та налаштовано за допомогою:
+- **React** — створення користувацького інтерфейсу.
+- **Vite** — інструмент для швидкої збірки та розробки.
+- **Redux Toolkit** — глобальне управління станом.
+- **React Router DOM** — маршрутизація сторінок.
+- **React Hook Form** + **Yup** — обробка та валідація форм налаштувань.
 
-## React Compiler
+## Базові команди
+У проєкті доступні наступні команди (запускаються через `npm run <команда>`):
+- `dev` — запускає локальний сервер розробки Vite.
+- `build` — збирає оптимізований проєкт для продакшену.
+- `lint` — запускає перевірку коду за допомогою ESLint.
+- `preview` — запускає локальний сервер для попереднього перегляду зібраного продакшен-білда.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Ліцензія
+Цей проєкт поширюється за ліцензією MIT. Деталі можна знайти у файлі [LICENSE.txt](./LICENSE.txt), а звіт про перевірку залежностей — у файлі [license-report.txt](./license-report.txt).
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Авторство
+Автор проєкту: Лізунов Артем
